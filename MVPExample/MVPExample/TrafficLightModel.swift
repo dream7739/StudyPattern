@@ -1,5 +1,5 @@
 //
-//  TrafficLightService.swift
+//  TrafficLight.swift
 //  MVPExample
 //
 //  Created by 홍정민 on 2020. 2. 11..
@@ -8,20 +8,20 @@
 
 import Foundation
 
-class TrafficLightService{
-    func getTrafficLight(colorName: (String), callBack: (TrafficLight?) -> Void){
+struct TrafficLight{
+    let colorName: String
+    let description: String
+}
+
+//실제 사용 모델
+class TrafficLightModel: TrafficLightModelProtocol {
+    func getTrafficLight(_ colorName: (String)) -> TrafficLight! {
        
         //신호등 배열
         let trafficLights = [TrafficLight(colorName : "Red", description: "Stop"),
                              TrafficLight(colorName: "Green", description: "Go"),
                              TrafficLight(colorName: "Yellow", description: "About to change to Red")]
         
-        //first : Returns the first element of the sequence that satisfies the given predicate.
-        //
-        if let foundTrafficLight = trafficLights.first(where: {$0.colorName == colorName}){
-            callBack(foundTrafficLight)
-        }else {
-            callBack(nil)
-        }
+        return trafficLights.first(where: {$0.colorName == colorName})
     }
 }
