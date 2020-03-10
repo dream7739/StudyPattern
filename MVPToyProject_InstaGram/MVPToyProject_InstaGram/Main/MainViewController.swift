@@ -2,47 +2,45 @@
 
 import UIKit
 
-class MainViewController: UIViewController{
- 
+class MainViewController: UIViewController, MainViewProtocol{
     
-    func pushCommentVC() {
-        guard let commentVC = storyboard?.instantiateViewController(withIdentifier: "commentDetail") as? CommentViewController else { return }
-        navigationController?.pushViewController(commentVC, animated: true)
-    }
 
-    
     //collectionView와 tableView 선언
     @IBOutlet weak var storyCollectionView: UICollectionView!
     @IBOutlet weak var feedTableView: UITableView!
     
+    
     //presenter
-    let presenter = MainViewPresenter()
+    private var presenter : MainPresenterProtocol!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        presenter = MainPresenter(view: self)
+        
         setUpCollectionView()
         setUpTableView()
         storyCollectionView.reloadData()
         feedTableView.reloadData()
     }
     
-
-
+    
+    
     //collectionView 설정
     func setUpCollectionView(){
         storyCollectionView.delegate = self
-        storyCollectionView.dataSource = presenter
+        storyCollectionView.dataSource = presenter as! UICollectionViewDataSource
     }
     
     //tableView 설정
     func setUpTableView(){
         feedTableView.delegate = self
-        feedTableView.dataSource = presenter
+        feedTableView.dataSource = presenter as! UITableViewDataSource
     }
     
-
-
+    
+    
 }
 
 
