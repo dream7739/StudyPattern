@@ -7,6 +7,10 @@ protocol HeartBtnDelegate : NSObjectProtocol {
     func clickHeartBtn(_ index : Int, _ isClicked : Bool)
 }
 
+protocol CommentBtnDelegate : NSObjectProtocol {
+    func clickCommentBtn(_ index : Int)
+}
+
 
 
 
@@ -163,7 +167,9 @@ extension MainViewController : UITableViewDataSource {
             cell.feedImageView?.image = UIImage(named: data.feedImage)
             cell.feedLabel?.text = "\(data.profileName!)  " + "\(data.feedText!)"
             cell.index = indexPath.section
-            cell.delegate = self
+            
+            cell.heartDelegate = self
+            cell.commentDelegate = self
             
             return cell
         }
@@ -180,6 +186,18 @@ extension MainViewController : HeartBtnDelegate {
         }
     }
 }
+
+extension MainViewController : CommentBtnDelegate {
+    func clickCommentBtn(_ index: Int) {
+        let commentVC = self.storyboard!.instantiateViewController(withIdentifier: "CommentVC") as! CommentViewController
+        navigationController?.pushViewController(commentVC, animated: true)
+        
+        commentVC.indexValue = index
+    }
+    
+    
+}
+
 
 
 

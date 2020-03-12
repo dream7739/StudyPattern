@@ -41,6 +41,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7f3-hI-3ZF">
                                                     <rect key="frame" x="55" y="370" width="30" height="30"/>
                                                     <state key="normal" image="comment"/>
+                                                    <connections>
+                                                        <action selector="postComment:" destination="pHC-dY-h5I" eventType="touchUpInside" id="joH-EM-rxi"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="pengsu  펭하! #펭수 #자이언트팽티비" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cEh-xu-4Y1">
                                                     <rect key="frame" x="15" y="410" width="350" height="20.5"/>

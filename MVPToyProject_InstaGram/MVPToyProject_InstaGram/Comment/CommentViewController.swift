@@ -47,7 +47,7 @@ extension CommentViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell") as! CommentCell
         let data = feedData.comment[indexPath.row]
-        cell.commentLabel.text = "\(data.commentAutor!) " + "\(data.comment!)"
+        cell.commentLabel.text = "\(data.commentAutor!)  " + "\(data.comment!)"
         return cell
     }
     
