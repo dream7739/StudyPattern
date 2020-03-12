@@ -26,6 +26,7 @@ class FeedCell : UITableViewCell {
 
 extension FeedCell{
     func setTableViewDataSourceDelegate(_ dataSourceDelegate: MainViewController, forSection section: Int){
+        dataSourceDelegate.sectionValue = section
         previewCommentTableView?.delegate = dataSourceDelegate
         previewCommentTableView?.dataSource = dataSourceDelegate
         previewCommentTableView?.reloadData()

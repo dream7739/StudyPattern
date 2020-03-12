@@ -17,7 +17,7 @@ class MainViewController: UIViewController, MainViewProtocol{
     private var commentData : [CommentModel] = []
     private var storyData : [Story] = []
     
-    var section:Int = 0
+    var sectionValue:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,31 +117,44 @@ extension MainViewController : UITableViewDelegate  {
 extension MainViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return 1
+        if(tableView.tag == 100) {
+            return feedData[sectionValue].comment.count
+        } else {
+            return 1
+        }
     }
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return feedData.count
+        if(tableView.tag == 100){
+            return 1
+        } else {
+            return feedData.count
+            
+        }
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "feedCell") as! FeedCell
-        
-        //cell.setTableViewDataSourceDelegate(self, forSection: indexPath.section)
-        
-        let data = feedData[indexPath.section]
-        
-        cell.profileImageView?.image = UIImage(named: data.profileImage!)
-        cell.profileLabel?.text = data.profileName
-        cell.feedImageView?.image = UIImage(named: data.feedImage)
-        cell.feedLabel?.text = "\(data.profileName!)  " + "\(data.feedText!)"
-        cell.section = indexPath.section
-        
-        return cell
-        
+        if(tableView.tag == 100){
+            let cell = tableView.dequeueReusableCell(withIdentifier: "insideFeedCell") as! InsideFeedCell
+            let data = feedData[sectionValue].comment[indexPath.row]
+            cell.commentLabel.text = "\(data.commentAutor!)  \(data.comment!)"
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "feedCell") as! FeedCell
+            
+            cell.setTableViewDataSourceDelegate(self, forSection: indexPath.section)
+            
+            let data = feedData[indexPath.section]
+            
+            cell.profileImageView?.image = UIImage(named: data.profileImage!)
+            cell.profileLabel?.text = data.profileName
+            cell.feedImageView?.image = UIImage(named: data.feedImage)
+            cell.feedLabel?.text = "\(data.profileName!)  " + "\(data.feedText!)"
+            
+            return cell
+        }
     }
 }
 
