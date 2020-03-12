@@ -20,11 +20,17 @@ class CommentViewController : UIViewController, CommentViewProtocol {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        feedData = presenter.getFeedData(indexValue)
         setUpTableView()
+        
+        profileImageView.image = UIImage(named: feedData.profileImage!)
+        nickNameLabel.text = feedData.profileName
+        feedTextLabel.text = feedData.feedText ?? " "
+        
+        
     }
     
     func setUpTableView(){
-        feedData = presenter.getFeedData(indexValue)
         commentTableView.delegate = self
         commentTableView.dataSource = self
         commentTableView.reloadData()

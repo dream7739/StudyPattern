@@ -23,6 +23,10 @@ class MainPresenter : NSObject, MainPresenterProtocol {
         return self.storyModel.getStoryModel()
     }
     
+    func addHeartCount(_ index : Int){
+        self.feedModel.feedArray[index].heartCount += 1
+    }
+    
   
     
 }

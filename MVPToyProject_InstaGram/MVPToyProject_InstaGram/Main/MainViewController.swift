@@ -2,6 +2,14 @@
 
 import UIKit
 
+
+protocol HeartBtnDelegate : NSObjectProtocol {
+    func clickHeartBtn(_ index : Int, _ isClicked : Bool)
+}
+
+
+
+
 class MainViewController: UIViewController, MainViewProtocol{
     
     //collectionView와 tableView 선언
@@ -14,7 +22,6 @@ class MainViewController: UIViewController, MainViewProtocol{
     
     //data 선언
     private var feedData : [Feed] = []
-    private var commentData : [CommentModel] = []
     private var storyData : [Story] = []
     
     var sectionValue:Int = 0
@@ -116,6 +123,7 @@ extension MainViewController : UITableViewDelegate  {
 
 extension MainViewController : UITableViewDataSource {
     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         if(tableView.tag == 100) {
             return feedData[sectionValue].comment.count
@@ -138,8 +146,10 @@ extension MainViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if(tableView.tag == 100){
             let cell = tableView.dequeueReusableCell(withIdentifier: "insideFeedCell") as! InsideFeedCell
+            
             let data = feedData[sectionValue].comment[indexPath.row]
             cell.commentLabel.text = "\(data.commentAutor!)  \(data.comment!)"
+            
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "feedCell") as! FeedCell
@@ -153,12 +163,23 @@ extension MainViewController : UITableViewDataSource {
             cell.feedImageView?.image = UIImage(named: data.feedImage)
             cell.feedLabel?.text = "\(data.profileName!)  " + "\(data.feedText!)"
             cell.index = indexPath.section
+            cell.delegate = self
             
             return cell
         }
     }
 }
 
+extension MainViewController : HeartBtnDelegate {
+    func clickHeartBtn(_ index : Int, _ isClicked : Bool){
+        if(!isClicked){
+            print("\(index) \(isClicked)")
+            presenter.addHeartCount(index)
+        }else {
+            print("\(index) \(isClicked)")
+        }
+    }
+}
 
 
 

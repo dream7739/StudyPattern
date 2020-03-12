@@ -34,6 +34,9 @@
                                                         <constraint firstAttribute="height" constant="30" id="JxK-dG-yS6"/>
                                                     </constraints>
                                                     <state key="normal" image="heart"/>
+                                                    <connections>
+                                                        <action selector="giveHeart:" destination="pHC-dY-h5I" eventType="touchUpInside" id="YZQ-Sz-QqE"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7f3-hI-3ZF">
                                                     <rect key="frame" x="55" y="370" width="30" height="30"/>
@@ -160,7 +163,6 @@
                                             <outlet property="commentButton" destination="7f3-hI-3ZF" id="rgb-e8-9Vc"/>
                                             <outlet property="feedImageView" destination="YaX-lq-2Fe" id="oMo-gv-IM4"/>
                                             <outlet property="feedLabel" destination="cEh-xu-4Y1" id="1B6-Vq-qBK"/>
-                                            <outlet property="heartButton" destination="SoS-iv-vrQ" id="fyP-vT-iK4"/>
                                             <outlet property="previewCommentTableView" destination="QHe-j4-Iq1" id="cOE-ru-wAv"/>
                                             <outlet property="profileImageView" destination="4Q1-pN-o6r" id="4KT-kC-YRo"/>
                                             <outlet property="profileLabel" destination="lZI-jn-cer" id="LA3-SH-Ef2"/>
