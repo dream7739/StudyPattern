@@ -3,9 +3,7 @@
 import UIKit
 
 
-class CommentViewPresenter : NSObject, CommentPresenterProtocol {
- 
-    
+class CommentViewPresenter : CommentPresenterProtocol {
  
     private let cellIdentifier = "CommentCell"
     private let view : CommentViewProtocol!

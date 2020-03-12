@@ -11,7 +11,7 @@ class CommentViewController : UIViewController, CommentViewProtocol {
     @IBOutlet weak var commentTextField: UITextField!
     @IBOutlet weak var commentSubmitButton: UIButton!
     
-    var presenter: CommentPresenterProtocol!
+    private var presenter: CommentPresenterProtocol!
     private var commentData: Feed!
     var indexValue: Int!
     
