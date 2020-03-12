@@ -12,7 +12,7 @@ class CommentViewController : UIViewController, CommentViewProtocol {
     @IBOutlet weak var commentSubmitButton: UIButton!
     
     private var presenter: CommentPresenterProtocol!
-    private var commentData: Feed!
+    private var feedData: Feed!
     var indexValue: Int!
     
     override func viewDidLoad() {
@@ -24,7 +24,7 @@ class CommentViewController : UIViewController, CommentViewProtocol {
     }
     
     func setUpTableView(){
-        commentData = presenter.getFeedData(indexValue)
+        feedData = presenter.getFeedData(indexValue)
         commentTableView.delegate = self
         commentTableView.dataSource = self
         commentTableView.reloadData()
@@ -35,12 +35,13 @@ class CommentViewController : UIViewController, CommentViewProtocol {
 
 extension CommentViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return commentData.comment.count
+        return feedData.comment.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell") as! CommentCell
-        cell.commentLabel.text = commentData.comment[indexPath.row].comment
+        let data = feedData.comment[indexPath.row]
+        cell.commentLabel.text = "\(data.commentAutor!) " + "\(data.comment!)"
         return cell
     }
     

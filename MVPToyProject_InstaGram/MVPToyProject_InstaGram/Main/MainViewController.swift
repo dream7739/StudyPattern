@@ -152,6 +152,7 @@ extension MainViewController : UITableViewDataSource {
             cell.profileLabel?.text = data.profileName
             cell.feedImageView?.image = UIImage(named: data.feedImage)
             cell.feedLabel?.text = "\(data.profileName!)  " + "\(data.feedText!)"
+            cell.index = indexPath.section
             
             return cell
         }
