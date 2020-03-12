@@ -8,7 +8,8 @@ protocol MainViewProtocol{
 
 
 protocol MainPresenterProtocol{
-    
+    func getFeedData() -> [Feed]
+    func getStoryData() -> [Story]
 }
 
 protocol FeedModelProtocol{
