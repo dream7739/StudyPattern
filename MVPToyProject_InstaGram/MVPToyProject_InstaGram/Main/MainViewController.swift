@@ -45,8 +45,8 @@ class MainViewController: UIViewController, MainViewProtocol{
         //댓글 모두보기 버튼 클릭 시 notification 수신을 위한 옵저버 설정
         NotificationCenter.default.addObserver(self, selector: #selector(goCommentVC), name: NSNotification.Name("commentBtnClick"), object: nil)
         
-        
     }
+    
     
     @objc func goCommentVC(notification : Notification){
         let commentVC = self.storyboard!.instantiateViewController(withIdentifier: "CommentVC") as! CommentViewController

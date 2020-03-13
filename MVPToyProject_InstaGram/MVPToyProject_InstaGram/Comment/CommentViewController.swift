@@ -13,7 +13,6 @@ class CommentViewController : UIViewController, UITextFieldDelegate, CommentView
     @IBOutlet weak var textfieldConstraint: NSLayoutConstraint!
     
     private var presenter: CommentPresenterProtocol!
-    private var feedData: Feed!
     var indexValue: Int!
     
     override func viewDidLoad() {
@@ -21,11 +20,16 @@ class CommentViewController : UIViewController, UITextFieldDelegate, CommentView
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        feedData = presenter.getFeedData(indexValue)
-        
+    
+        let data = presenter.getFeedData(indexValue)
+        profileImageView.image = UIImage(named: data.profileImage!)
+        nickNameLabel.text = data.profileName!
+        feedTextLabel.text = data.feedText!
         self.commentTextField.delegate = self
-        
+
         setUpTableView()
+
+        commentSubmitButton.addTarget(self, action: #selector(submitComment), for: .touchUpInside)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
@@ -34,12 +38,17 @@ class CommentViewController : UIViewController, UITextFieldDelegate, CommentView
         
     }
     
+    
+    
+    //키보드 리턴 버튼 클릭 시 키보드 내림
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
         
     }
+
     
+    //키보드 나타날 때 텍스트 필드 constraint 증가
     @objc func keyboardWillShow(_ sender: Notification) {
         if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue{
             let keyboardRectangle = keyboardFrame.cgRectValue
@@ -48,6 +57,8 @@ class CommentViewController : UIViewController, UITextFieldDelegate, CommentView
         }
     }
     
+    
+    //키보드 들어갈 때 텍스트 필드 constraint 감소
     @objc func keyboardWillHide(_ sender: Notification) {
         if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue{
             let keyboardRectangle = keyboardFrame.cgRectValue
@@ -57,16 +68,26 @@ class CommentViewController : UIViewController, UITextFieldDelegate, CommentView
         
     }
     
+    
+    //화면 터치 시 키보드 내리기
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
         self.view.endEditing(true)
     }
     
     
-    
+    //테이블뷰 설정
     func setUpTableView(){
         commentTableView.delegate = self
         commentTableView.dataSource = self
         commentTableView.reloadData()
+    }
+    
+    
+    @objc func submitComment(){
+        guard let comment = commentTextField.text else { return }
+        self.presenter.addComment(indexValue, comment)
+        print("\(presenter.getFeedData(indexValue).comment)")
+        self.commentTableView.reloadData()
     }
     
     
@@ -76,12 +97,12 @@ class CommentViewController : UIViewController, UITextFieldDelegate, CommentView
 
 extension CommentViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return feedData.comment.count
+        return presenter.getFeedData(indexValue).comment.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell") as! CommentCell
-        let data = feedData.comment[indexPath.row]
+        let data = presenter.getFeedData(indexValue).comment[indexPath.row]
         cell.commentLabel.text = "\(data.commentAutor!)  " + "\(data.comment!)"
         return cell
     }
