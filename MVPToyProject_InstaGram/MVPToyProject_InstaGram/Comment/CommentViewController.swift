@@ -2,7 +2,7 @@
 
 import UIKit
 
-class CommentViewController : UIViewController, CommentViewProtocol {
+class CommentViewController : UIViewController, UITextFieldDelegate, CommentViewProtocol {
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nickNameLabel: UILabel!
@@ -10,6 +10,7 @@ class CommentViewController : UIViewController, CommentViewProtocol {
     @IBOutlet weak var commentTableView: UITableView!
     @IBOutlet weak var commentTextField: UITextField!
     @IBOutlet weak var commentSubmitButton: UIButton!
+    @IBOutlet weak var textfieldConstraint: NSLayoutConstraint!
     
     private var presenter: CommentPresenterProtocol!
     private var feedData: Feed!
@@ -21,14 +22,46 @@ class CommentViewController : UIViewController, CommentViewProtocol {
     
     override func viewWillAppear(_ animated: Bool) {
         feedData = presenter.getFeedData(indexValue)
+        
+        self.commentTextField.delegate = self
+        
         setUpTableView()
         
-        profileImageView.image = UIImage(named: feedData.profileImage!)
-        nickNameLabel.text = feedData.profileName
-        feedTextLabel.text = feedData.feedText ?? " "
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+        
+    }
+    
+    @objc func keyboardWillShow(_ sender: Notification) {
+        if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue{
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            textfieldConstraint.constant += keyboardHeight
+        }
+    }
+    
+    @objc func keyboardWillHide(_ sender: Notification) {
+        if let keyboardFrame: NSValue = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue{
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            textfieldConstraint.constant -= keyboardHeight
+        }
+        
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+        self.view.endEditing(true)
+    }
+    
+    
     
     func setUpTableView(){
         commentTableView.delegate = self
@@ -38,6 +71,8 @@ class CommentViewController : UIViewController, CommentViewProtocol {
     
     
 }
+
+
 
 extension CommentViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{

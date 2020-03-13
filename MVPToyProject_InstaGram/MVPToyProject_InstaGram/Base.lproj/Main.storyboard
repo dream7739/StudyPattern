@@ -369,6 +369,7 @@
                         <outlet property="feedTextLabel" destination="idH-jm-0JD" id="WQP-PI-gIG"/>
                         <outlet property="nickNameLabel" destination="5ai-Zb-hhJ" id="eow-Rr-F3W"/>
                         <outlet property="profileImageView" destination="DN6-Ac-55G" id="DDE-rm-cf4"/>
+                        <outlet property="textfieldConstraint" destination="zTI-CJ-apt" id="965-LA-ZVw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eWA-9q-uME" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
