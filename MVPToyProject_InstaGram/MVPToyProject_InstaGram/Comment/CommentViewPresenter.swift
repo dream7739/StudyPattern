@@ -24,7 +24,7 @@ class CommentViewPresenter : CommentPresenterProtocol {
         commentModel.commentAutor = "jmzzang"
         commentModel.commentHeart = 0
 
-        model.feedArray[at].comment += [commentModel]
+        FeedModel.feedArray[at].comment += [commentModel]
         
     }
     

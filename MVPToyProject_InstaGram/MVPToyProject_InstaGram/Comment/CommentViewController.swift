@@ -86,7 +86,6 @@ class CommentViewController : UIViewController, UITextFieldDelegate, CommentView
     @objc func submitComment(){
         guard let comment = commentTextField.text else { return }
         self.presenter.addComment(indexValue, comment)
-        print("\(presenter.getFeedData(indexValue).comment)")
         self.commentTableView.reloadData()
     }
     

@@ -80,8 +80,8 @@ class MainViewController: UIViewController, MainViewProtocol{
 //collectionView delegate & dataSource 설정
 extension MainViewController :  UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemWidth = UIScreen.main.bounds.width / 5.9
-        let itemHeight = UIScreen.main.bounds.height / 9.96
+        let itemWidth = UIScreen.main.bounds.width / 5.5
+        let itemHeight = UIScreen.main.bounds.height / 8.0
         let size = CGSize(width: itemWidth, height: itemHeight)
         return size
     }

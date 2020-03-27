@@ -8,9 +8,9 @@ struct Story{
 }
 
 class StoryModel : StoryModelProtocol {
-    var storyArray:[Story] = [Story(profile: "profile", nickName: "pengsu"),Story(profile: "profile", nickName: "pengsu"), Story(profile: "profile", nickName: "pengsu"), Story(profile: "profile", nickName: "pengsu"), Story(profile: "profile", nickName: "pengsu"), Story(profile: "profile", nickName: "pengsu"), Story(profile: "profile", nickName: "pengsu")]
+    static var storyArray:[Story] = [Story(profile: "profile", nickName: "pengsu"),Story(profile: "profile", nickName: "pengsu"), Story(profile: "profile", nickName: "pengsu"), Story(profile: "profile", nickName: "pengsu"), Story(profile: "profile", nickName: "pengsu"), Story(profile: "profile", nickName: "pengsu"), Story(profile: "profile", nickName: "pengsu")]
     
     func getStoryModel() -> [Story] {
-        return storyArray
+        return StoryModel.storyArray
     }
 }

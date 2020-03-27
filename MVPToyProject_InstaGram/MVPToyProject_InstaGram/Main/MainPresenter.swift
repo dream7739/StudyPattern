@@ -16,15 +16,15 @@ class MainPresenter : NSObject, MainPresenterProtocol {
     
     
     func getFeedData() -> [Feed] {
-        return self.feedModel.getFeedModel()
+        return FeedModel.feedArray
     }
     
     func getStoryData() -> [Story] {
-        return self.storyModel.getStoryModel()
+        return StoryModel.storyArray
     }
     
     func addHeartCount(_ index : Int){
-        self.feedModel.feedArray[index].heartCount += 1
+        FeedModel.feedArray[index].heartCount += 1
     }
     
   
