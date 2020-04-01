@@ -22,8 +22,8 @@ class CommentViewController : UIViewController, UITextFieldDelegate, CommentView
     override func viewWillAppear(_ animated: Bool) {
     
         let data = presenter.getFeedData(indexValue)
-        profileImageView.image = UIImage(named: data.profileImage!)
-        nickNameLabel.text = data.profileName!
+        profileImageView.image = UIImage(named: data.profileImage)
+        nickNameLabel.text = data.profileName
         feedTextLabel.text = data.feedText!
         self.commentTextField.delegate = self
 

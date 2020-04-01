@@ -30,6 +30,16 @@ class MainViewController: UIViewController, MainViewProtocol{
     
     var sectionValue:Int = 0
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        storyData = self.presenter.getStoryData()
+        feedData = self.presenter.getFeedData()
+
+        storyCollectionView.reloadData()
+        feedTableView.reloadData()
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -162,10 +172,10 @@ extension MainViewController : UITableViewDataSource {
             
             let data = feedData[indexPath.section]
             
-            cell.profileImageView?.image = UIImage(named: data.profileImage!)
+            cell.profileImageView?.image = UIImage(named: data.profileImage)
             cell.profileLabel?.text = data.profileName
-            cell.feedImageView?.image = UIImage(named: data.feedImage)
-            cell.feedLabel?.text = "\(data.profileName!)  " + "\(data.feedText!)"
+            cell.feedImageView?.image =  data.feedImage
+            cell.feedLabel?.text = "\(data.profileName)  " + "\(data.feedText!)"
             cell.index = indexPath.section
             
             cell.heartDelegate = self
