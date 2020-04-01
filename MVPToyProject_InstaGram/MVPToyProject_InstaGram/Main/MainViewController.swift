@@ -80,8 +80,8 @@ class MainViewController: UIViewController, MainViewProtocol{
 //collectionView delegate & dataSource 설정
 extension MainViewController :  UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemWidth = UIScreen.main.bounds.width / 5.5
-        let itemHeight = UIScreen.main.bounds.height / 8.0
+        let itemWidth = view.frame.width / 5.5
+        let itemHeight = view.frame.height / 9.0
         let size = CGSize(width: itemWidth, height: itemHeight)
         return size
     }
@@ -105,7 +105,7 @@ extension MainViewController : UICollectionViewDataSource {
         let data = storyData[indexPath.row]
         
         cell.profileImageView?.image = UIImage(named: data.profile)
-        cell.profileImageView?.layer.cornerRadius = (cell.profileImageView?.frame.height)! / 2
+        cell.profileImageView?.layer.cornerRadius = (cell.profileImageView?.frame.height)! / 2.0
         cell.profileImageView?.clipsToBounds = true //지정한 경계선에 이미지를 맞추기
         
         cell.nickNameLabel?.text = data.nickName
