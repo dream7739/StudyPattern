@@ -6,6 +6,7 @@ class FeedCell : UITableViewCell {
     @IBOutlet weak var profileLabel: UILabel?
     @IBOutlet weak var feedImageView: UIImageView?
     @IBOutlet weak var commentButton: UIButton?
+    @IBOutlet weak var commentMoreBtn: UIButton!
     @IBOutlet weak var feedLabel: UILabel?
     @IBOutlet weak var previewCommentTableView: UITableView?
     

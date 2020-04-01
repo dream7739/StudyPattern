@@ -21,7 +21,7 @@ class CommentViewPresenter : CommentPresenterProtocol {
     func addComment(_ at: Int, _ comment: String) {
         var commentModel = Comment()
         commentModel.comment = comment
-        commentModel.commentAutor = "jmzzang"
+        commentModel.commentAutor = "pengsu"
         commentModel.commentHeart = 0
 
         FeedModel.feedArray[at].comment += [commentModel]

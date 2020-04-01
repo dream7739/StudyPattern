@@ -166,6 +166,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="commentButton" destination="7f3-hI-3ZF" id="rgb-e8-9Vc"/>
+                                            <outlet property="commentMoreBtn" destination="Zgs-TH-wpy" id="10C-7M-pwB"/>
                                             <outlet property="feedImageView" destination="YaX-lq-2Fe" id="oMo-gv-IM4"/>
                                             <outlet property="feedLabel" destination="cEh-xu-4Y1" id="1B6-Vq-qBK"/>
                                             <outlet property="previewCommentTableView" destination="QHe-j4-Iq1" id="cOE-ru-wAv"/>

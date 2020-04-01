@@ -34,7 +34,7 @@ class MainViewController: UIViewController, MainViewProtocol{
     override func viewWillAppear(_ animated: Bool) {
         storyData = self.presenter.getStoryData()
         feedData = self.presenter.getFeedData()
-
+        
         storyCollectionView.reloadData()
         feedTableView.reloadData()
         
@@ -171,12 +171,18 @@ extension MainViewController : UITableViewDataSource {
             cell.setTableViewDataSourceDelegate(self, forSection: indexPath.section)
             
             let data = feedData[indexPath.section]
-            
             cell.profileImageView?.image = UIImage(named: data.profileImage)
             cell.profileLabel?.text = data.profileName
             cell.feedImageView?.image =  data.feedImage
             cell.feedLabel?.text = "\(data.profileName)  " + "\(data.feedText!)"
             cell.index = indexPath.section
+            
+            let commentCount = data.comment.count
+            if commentCount == 0{
+                cell.commentMoreBtn?.setTitle( "댓글 작성하기", for: .normal)
+            }else {
+                cell.commentMoreBtn?.setTitle( "댓글 \(commentCount)개 모두보기", for: .normal)
+            }
             
             cell.heartDelegate = self
             cell.commentDelegate = self
