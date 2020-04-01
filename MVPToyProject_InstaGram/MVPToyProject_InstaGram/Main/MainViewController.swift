@@ -167,10 +167,10 @@ extension MainViewController : UITableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "feedCell") as! FeedCell
-            
             cell.setTableViewDataSourceDelegate(self, forSection: indexPath.section)
             
             let data = feedData[indexPath.section]
+                
             cell.profileImageView?.image = UIImage(named: data.profileImage)
             cell.profileLabel?.text = data.profileName
             cell.feedImageView?.image =  data.feedImage
@@ -179,7 +179,7 @@ extension MainViewController : UITableViewDataSource {
             
             let commentCount = data.comment.count
             if commentCount == 0{
-                cell.commentMoreBtn?.setTitle( "댓글 작성하기", for: .normal)
+                cell.commentMoreBtn?.setTitle( "댓글 상세보기", for: .normal)
             }else {
                 cell.commentMoreBtn?.setTitle( "댓글 \(commentCount)개 모두보기", for: .normal)
             }
