@@ -12,10 +12,21 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+    
+        let storage = MemoryStorage() //메모리 저장소
+        let coordinator = SceneCoordinator(window: window!) //씬 전환에 필요한 coordinator
+        //뷰 모델은 두 인스턴스를 통해 메모를 저장하고, 화면전환을 처리
+        let listViewModel = MemoListViewModel(title: "나의 메모", sceneCoordinator: coordinator, storage: storage)
+        
+        //새로운 씬 생성
+        let listScene = Scene.list(listViewModel)
+        
+        coordinator.transition(to: listScene, using: .root, animated: true)
+        
         return true
     }
 

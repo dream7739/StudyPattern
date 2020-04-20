@@ -16,6 +16,7 @@ enum Scene {
 
 extension Scene {
     //스토리보드의 Scene을 생성하고 연관값에 저장된 ViewModel을 바인딩하고 리턴
+    //실제 씬이 만들어지는 부분
     func instantiate(from storyboard: String = "Main") -> UIViewController {
         let storyboard = UIStoryboard(name: storyboard, bundle: nil)
         

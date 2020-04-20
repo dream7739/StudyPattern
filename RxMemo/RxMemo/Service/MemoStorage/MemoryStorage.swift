@@ -46,15 +46,14 @@ class MemoryStorage : MemoStorageType {
     
     func update(memo: Memo, content: String) -> Observable<Memo> {
         let updated = Memo(original: memo, updateContent: content)
-        
+ 
         //기존 메모를 교체
         if let index = list.firstIndex(where: {$0 == memo}){
             list.remove(at: index)
-            list.insert(memo, at: index)
+            list.insert(updated, at: index)
         }
         
         store.onNext(list)
-        
         return Observable.just(updated)
     }
     
